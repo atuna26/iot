@@ -1,11 +1,12 @@
 import styles from "../../style"
+import PropTypes from 'prop-types';
 import ProductCard from "./ProductCard"
-const CategoryCard = () => {
+const CategoryCard = (props) => {
   return (
     <div className="flex flex-col items-center w-full min-h-[300px] max-w-[450px] col-span-1">
       <div className="flex w-full items-center justify-between px-4">
         <p className={`${styles.paragraph} text-primary max-w-[400px] mt-5 text-center md:text-start`}>
-            Oturma Odası
+            {props.name}
         </p>
         <p className={`${styles.paragraph} text-primary max-w-[400px] mt-5 text-center md:text-start`}>
             <i className="fa-solid fa-temperature-high text-red-800 font-light"></i>
@@ -19,6 +20,10 @@ const CategoryCard = () => {
       </div>
     </div>
   )
+}
+
+CategoryCard.propTypes = {
+  name: PropTypes.string.isRequired,
 }
 
 export default CategoryCard
