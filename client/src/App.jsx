@@ -1,13 +1,15 @@
-import { BrowserRouter, Route, Routes, useLocation,  } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation, useNavigate,  } from "react-router-dom";
 import Main from "./homeLandingPage/components/Main";
 import LoginPage from "./LoginPage";
 import EditableMenu from "./homeLandingPage/components/EditableMenu";
 import styles from "./style";
 import { Navbar } from "./homeLandingPage/components";
 import EditableMain from "./homeLandingPage/components/EditableMain";
+import RegisterPage from "./RegisterPage";
+import { useSelector } from "react-redux";
 
 function App() {
-  const isAuth = true 
+  const isAuth = Boolean(useSelector((state) => state.token)); 
   const location = useLocation();
   console.log(location.pathname)
   return (
@@ -23,6 +25,8 @@ function App() {
             <div className={`${styles.boxWidth}`}>
               <Routes>
                 <Route path="/" element={<Main />} />
+                <Route path="/login" element={<Navigate to="/" replace/>} />
+                <Route path="/register" element={<Navigate to="/" replace/>} />
                 <Route path="/editLayout" element={<EditableMain />} />
               </Routes>
             </div>
@@ -30,7 +34,9 @@ function App() {
         </div>
       ) : (
         <Routes>
+          <Route path="/" element={<Navigate to="/login" replace/>} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Routes>
       )}
     </div>

@@ -20,13 +20,12 @@
 
 .text-gradient {
   background: radial-gradient(
-    64.18% 64.18% at 71.16% 35.69%,
-    rgb(7, 139, 247) 0.89%,
-    rgb(19, 112, 189) 17.23%,
-    rgb(22, 92, 150) 42.04%,
-    rgb(23, 74, 119) 55.12%,
-    rgb(24, 70, 107) 71.54%,   
-    rgb(23, 58, 88) 100%
+    circle, 
+    rgb(255, 255, 255) 0%,  /* Pure White Center */
+    rgb(230, 230, 230) 25%, /* Soft Light Gray */
+    rgb(200, 200, 200) 50%, /* Medium Gray */
+    rgb(230, 230, 230) 75%, /* Soft Light Gray */
+    rgb(255, 255, 255) 100%  /* Pure White Edge */
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -232,4 +231,20 @@
   border-radius: 50%;
   background: var(--thumb-color);
   cursor: pointer;
+}
+
+.text-white-gradient {
+  background: radial-gradient(
+    64.18% 64.18% at 71.16% 35.69%,
+    rgb(255, 255, 255) 0.89%,  /* Pure White */
+    rgb(240, 240, 240) 17.23%, /* Light Gray */
+    rgb(220, 220, 220) 42.04%, /* Medium Light Gray */
+    rgb(200, 200, 200) 55.12%, /* Soft Gray */
+    rgb(180, 180, 180) 71.54%, /* Slightly Darker Gray */
+    rgb(160, 160, 160) 100%    /* Darkest Gray */
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
 }

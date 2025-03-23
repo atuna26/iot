@@ -16,7 +16,8 @@
     "@heroicons/react": "^2.2.0",
     "@react-three/drei": "^9.121.2",
     "@react-three/fiber": "^8.17.12",
-    "@reduxjs/toolkit": "^2.5.1",
+    "@reduxjs/toolkit": "^2.6.1",
+    "formik": "^2.4.6",
     "react": "^18.3.1",
     "react-beautiful-dnd": "^13.1.1",
     "react-dnd": "^16.0.1",
@@ -25,7 +26,8 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.2.0",
     "redux-persist": "^6.0.0",
-    "three": "^0.172.0"
+    "three": "^0.172.0",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

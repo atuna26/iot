@@ -13,22 +13,12 @@ export const authSlice = createSlice({
     initialState,
     reducers:{
         setLogin: (state,action) =>{
-            state.user = action.payload.user;
             state.token = action.payload.token;
         },
         setLogout: (state) =>{
             state.user = null;
             state.token = null;
         },
-        setDoctors: (state, action) =>{
-            state.doctors = action.payload;
-        },
-        setMedicalExperts: (state, action) =>{
-            state.medicalExperts = action.payload;
-        },
-        setMRIs: (state,action) =>{
-            state.mris = action.payload;
-        }
      }
 })
 
