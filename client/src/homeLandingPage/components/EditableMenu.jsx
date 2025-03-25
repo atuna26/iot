@@ -17,6 +17,12 @@ import { CSS } from '@dnd-kit/utilities';
 import styles from "../../style";
 import EditableProductCard from './EditableProductCard';
 import NewProductCard from './NewProductCard';
+import LineChartCard from './LineChartCard';
+import AreaChartCard from './AreaChartCard';
+import BarChartCard from './BarChartCard';
+import EditableLineChartCard from './EditableLineChartCard';
+import EditableAreaChartCard from './EditableAreaChartCard';
+import EditableBarChartCard from './EditableBarChartCard';
 
 const SortableProductCard = ({ id, ...props }) => {
   const {
@@ -41,17 +47,24 @@ const SortableProductCard = ({ id, ...props }) => {
       {...listeners}
       className={`${props.rowSpan} ${props.colSpan}`}
     >
-      <EditableProductCard {...props} />
+      {props.type === "productCard" &&  <EditableProductCard {...props} />}
+      {props.type === "lineChartCard" &&  <EditableLineChartCard {...props} />}
+      {props.type === "areaChartCard" &&  <EditableAreaChartCard {...props} />}
+      {props.type === "barChartCard" &&  <EditableBarChartCard {...props} />}
+         
     </div>
   );
 };
 
 const EditableMenu = (props) => {
   const [cards, setCards] = useState([
-    { id: '1', icon: "fa-solid fa-faucet", name: "Su", status: "Açık", isIncludePercantage: false, rowSpan: "row-span-2", colSpan: "col-span-2", color: "bg-yellow-600" },
-    { id: '2', icon: "fa-regular fa-lightbulb", name: "Koltuk Işık", status: "Açık", isIncludePercantage: false, rowSpan: "row-span-8", colSpan: "col-span-2", color: "bg-green-600" },
-    { id: '3', icon: "fa-solid fa-fire-flame-simple", name: "Şömine", status: "Açık", isIncludePercantage: false, rowSpan: "row-span-2", colSpan: "col-span-2", color: "bg-red-600" },
-    { id: '4', icon: "fa-regular fa-lightbulb", name: "Oda Lambasi", status: "100", isIncludePercantage: true, rowSpan: "row-span-4", colSpan: "col-span-2", color: "bg-blue-300" }
+    { id: '1', type:"productCard", icon: "fa-solid fa-faucet", name: "Su", status: "Açık", isIncludePercantage: false, rowSpan: "row-span-2", colSpan: "col-span-2", color: "bg-yellow-600" },
+    { id: '2', type:"productCard", icon: "fa-regular fa-lightbulb", name: "Koltuk Işık", status: "Açık", isIncludePercantage: false, rowSpan: "row-span-8", colSpan: "col-span-2", color: "bg-green-600" },
+    { id: '3', type:"productCard", icon: "fa-solid fa-fire-flame-simple", name: "Şömine", status: "Açık", isIncludePercantage: false, rowSpan: "row-span-2", colSpan: "col-span-2", color: "bg-red-600" },
+    { id: '4', type:"productCard", icon: "fa-regular fa-lightbulb", name: "Oda Lambasi", status: "100", isIncludePercantage: true, rowSpan: "row-span-4", colSpan: "col-span-2", color: "bg-blue-300" },
+    /*{ id: '5', type:"lineChartCard", rowSpan: "row-span-4", colSpan: "col-span-4", color: "#8884d8", color2: "#82ca9d", chartType:"double" },
+    { id: '6', type:"areaChartCard", rowSpan: "row-span-4", colSpan: "col-span-4", color: "#8884d8", color2: "#82ca9d", chartType:"double" },
+    { id: '7', type:"barChartCard", rowSpan: "row-span-4", colSpan: "col-span-4", color: "#8884d8", color2: "#82ca9d", chartType:"double" },*/
   ]);
 
   const sensors = useSensors(
@@ -109,6 +122,9 @@ const EditableMenu = (props) => {
                 rowSpan={card.rowSpan}
                 colSpan={card.colSpan}
                 color={card.color}
+                color2={card.color2}
+                type={card.type}
+                chartType={card.chartType}
               />
             ))}
           </SortableContext>

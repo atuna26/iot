@@ -1,6 +1,9 @@
 import styles from "../../style"
 import PropTypes from 'prop-types';
 import ProductCard from "./ProductCard"
+import LineChartCard from "./LineChartCard";
+import AreaChartCard from "./AreaChartCard";
+import BarChartCard from "./BarChartCard";
 const CategoryCard = (props) => {
   return (
     <div className="flex flex-col items-center w-full min-h-[300px] max-w-[450px] col-span-1">
@@ -17,6 +20,9 @@ const CategoryCard = (props) => {
         <ProductCard icon="fa-regular fa-lightbulb" name="Koltuk Işık" status="Açık" isIncludePercantage={false} rowSpan="row-span-8" colSpan="col-span-2" color="bg-green-600"/>
         <ProductCard icon="fa-solid fa-fire-flame-simple" name="Şömine" status="Açık" isIncludePercantage={false} rowSpan="row-span-2" colSpan="col-span-2" color="bg-red-600" />
         <ProductCard icon="fa-regular fa-lightbulb" name="Oda Lambasi" status="100" isIncludePercantage={true} rowSpan="row-span-4" colSpan="col-span-2" color="bg-blue-300" />
+        <LineChartCard colSpan="col-span-4" rowSpan="row-span-4" color="#8884d8" color2="#82ca9d"  chartType="single"/>
+        <AreaChartCard colSpan="col-span-4" rowSpan="row-span-4" color="#8884d8" color2="#82ca9d" chartType="single"/>
+        <BarChartCard colSpan="col-span-4" rowSpan="row-span-4" color="#8884d8" color2="#82ca9d" chartType="single"/>
       </div>
     </div>
   )
