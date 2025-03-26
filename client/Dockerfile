@@ -1,7 +1,7 @@
-ROM nginx:alpine
+FROM nginx:alpine
 
 # Build klasörünü nginx klasörüne kopyala
-COPY build/ /usr/share/nginx/html
+COPY dist/ /usr/share/nginx/html
 
 # Opsiyonel: Nginx configini değiştirmek istersen
 # COPY nginx.conf /etc/nginx/nginx.conf

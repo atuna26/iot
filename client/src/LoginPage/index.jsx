@@ -26,9 +26,10 @@ const LoginPage = () => {
             body: JSON.stringify(values)
         })
         const loggedIn= await loginResponse.json()
+        console.log(loggedIn)
         if(loggedIn){
             dispatch(setLogin({
-                token: loggedIn.token
+                token: loggedIn.data.token
             }))
         }
         navigate("/")
