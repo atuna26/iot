@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom"
 import { useDispatch} from "react-redux"
 import { setLogin } from "../state"
 import logoWhite from "../assets/logoWhite.png"
+import { use, useEffect } from "react"
 
 
 const LoginPage = () => {
@@ -34,6 +35,11 @@ const LoginPage = () => {
         }
         navigate("/")
     }
+    
+    useEffect(() => {
+        document.title = "HipoIOT - Giriş Yap"
+    }
+    , []);// eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div style={{backgroundImage:`url(${loginBanner})`}} className={`w-full bg-cover bg-center h-screen overflow-hidden`}>

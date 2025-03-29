@@ -28,6 +28,7 @@ function App() {
                 <Route path="/login" element={<Navigate to="/" replace/>} />
                 <Route path="/register" element={<Navigate to="/" replace/>} />
                 <Route path="/editLayout" element={<EditableMain />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </div>
           </div>
