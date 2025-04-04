@@ -4,7 +4,101 @@ import ProductCard from "./ProductCard"
 import LineChartCard from "./LineChartCard";
 import AreaChartCard from "./AreaChartCard";
 import BarChartCard from "./BarChartCard";
+import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setDevices } from "../../state";
+
 const CategoryCard = (props) => {
+  const [socket,setSocket] = useState(null);
+  const token = useSelector((state) => state.token);
+  const currentDevices = useSelector((state) => state.devices);
+  const dispatch = useDispatch();
+
+  const connectSocket = () => {
+    if (!token) {
+      console.error("Token yok!");
+      return;
+    }
+
+    const newSocket = io("http://85.95.244.99:9268", {
+      auth: { token: token }
+    });
+
+    setSocket(newSocket);
+  };
+
+  const sendToken = () => {
+    if (socket && socket.connected) {
+      console.log("📡 Token gönderiliyor:", token);
+      socket.emit("get_data", token);
+    } else {
+      console.log("❌ Socket bağlantısı yok");
+    }
+  };
+  useEffect(() => {
+    connectSocket();
+
+    return () => {
+      if (socket) {
+        socket.disconnect();
+      }
+    };
+  }, []); // Sadece component mount olduğunda çalışır
+
+  useEffect(() => {
+    if(socket){
+      socket.on("connect", () => {
+        console.log("Connected to socket server");
+        sendToken();
+      });
+      socket.on("connect_error",() => {
+        console.log("Bağlantı hatası");
+      });
+      socket.on("disconnect", () => {
+        console.log("Disconnected from socket server");
+      });
+      socket.on("matched_data", (data) => {
+        /*[
+              {
+                "topic": "Ni7fsYK2gReP",
+                "key": "sensor-1",
+                "value": 38
+            },
+            {
+                "topic": "Ni7fsYK2gReP",
+                "key": "sensor-2",
+                "value": 11
+            }
+          ]*/
+        const updatedDevices = {
+          ...props.all, // tüm üst düzey özellikleri kopyala (serialNumber, deviceId, vb.)
+          parameters: props.parameters.map((parameter) => {
+            const matchedData = data.find(item => item.key === parameter.key);
+            if (matchedData) {
+              return {
+                ...parameter,
+                status: matchedData.value
+              };
+            }
+            return parameter;
+          })
+        };
+        const updatedDevicesList = currentDevices.map((device) =>
+          device.serialNumber === updatedDevices.serialNumber ? updatedDevices : device
+        );
+        dispatch(setDevices(updatedDevicesList));
+      }
+      );
+      
+    }
+  }, [socket]);// eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    document.title = "HipoIOT - Ana Sayfa";
+  })
+
   return (
     <div className="flex flex-col items-center w-full min-h-[300px] max-w-[450px] col-span-1">
       <div className="flex w-full items-center justify-between px-4">
@@ -48,7 +142,7 @@ CategoryCard.propTypes = {
       color: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
       isIncludePercantage: PropTypes.bool.isRequired,
-      statues: PropTypes.string.isRequired,
+      status: PropTypes.string.isRequired,
     })
   ).isRequired,
 }
