@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { navLinks } from "../constants";
 import logoWhite from "../../assets/logoWhite.png";
 import { Bars3Icon, XCircleIcon } from "@heroicons/react/24/outline";
@@ -18,6 +18,7 @@ const Navbar = () => {
   const [keys, setKeys] = useState([]);
   const [jsonData, setJsonData] = useState("");
 
+ 
 
   const getKeys = async () => {
     console.log(jsonData)
@@ -39,13 +40,14 @@ const Navbar = () => {
     serialNumber: Yup.string().required("Serial Number is required"),
     deviceName: Yup.string().required("Device Name is required"),
     width: Yup.string().required("Width is required"),
+    //isThisDeviceSmart: Yup.boolean().required(),
     parameters: Yup.array()
       .of(
         Yup.object().shape({
           key: Yup.string().required("Key is required"),
           icon: Yup.string().required("Icon Value is required"),
           label: Yup.string().required("Label is required"),
-          type: Yup.string().required("Type is required"),
+          type: Yup.string().default("float").required("Type is required"),
           isIncludePercantage: Yup.boolean().required(
             "Is Include Percentage is required"
           ),
@@ -53,6 +55,11 @@ const Navbar = () => {
           colSpan: Yup.string().required("Col Span is required"),
           color: Yup.string().required("Color is required"),
           status: Yup.string().default("0"),
+          visualization: Yup.string().default(),
+          thresholds: Yup.object().shape({
+            warning: Yup.number(),
+            critical: Yup.number(),
+          }),
         })
       )
       .required("Parameters are required"),
@@ -75,7 +82,8 @@ const Navbar = () => {
     );
     // const device = await deviceResponce.json();
     // console.log(device);
-    navigate("/");
+    setIsModalOpen(false); 
+    navigate("/")
   };
 
   return (
@@ -173,7 +181,7 @@ const Navbar = () => {
                 parameters: [
                   {
                     key: "",
-                    icon: "",
+                    icon: "fa-solid fa-faucet",
                     label: "",
                     type: "float",
                     isIncludePercantage: false,
@@ -181,6 +189,11 @@ const Navbar = () => {
                     colSpan: "col-span-2",
                     color: "bg-yellow-600",
                     status: "0",
+                    visualization:"",
+                    thresholds: {
+                      warning: "",
+                      critical: "",
+                    },
                   },
                 ],
               }}
@@ -214,7 +227,7 @@ const Navbar = () => {
                         htmlFor="JSON"
                         className="font-poppins font-semibold text-primary pt-2"
                       >
-                        JSON Veri
+                        JSON Veri 
                       </label>
                       <textarea
                         rows={8}
@@ -275,9 +288,9 @@ const Navbar = () => {
                       {values.parameters.map((parameter, index) => (
                         <div
                           key={index}
-                          className="grid grid-cols-2 border-solid border-2 border-gray rounded-md p-2 mt-1"
+                          className="grid grid-cols-2 border-solid border-2 border-gray rounded-md p-2 mt-1 gap-x-2"
                         >
-                          <div className="col-span-1 flex items-center gap-5">
+                          <div className="col-span-1 flex items-center justify-between">
                             <label 
                               htmlFor={`parameters[${index}].key`}
                               className=" font-poppins font-semibold text-primary pt-2"
@@ -290,6 +303,7 @@ const Navbar = () => {
                               id={`parameters[${index}].key`}
                               className=" border-solid border-2 border-gray rounded-md p-2 mt-1 bg-white cursor-pointer"
                             >
+                              <option></option>
                               {keys.map((key) => (
                                 <option key={key} value={key}>
                                   {key}
@@ -298,7 +312,7 @@ const Navbar = () => {
                             </Field>
                           </div>
                             
-                          <div className="col-span-1 flex items-center gap-5">
+                          <div className="col-span-1 flex items-center justify-between">
                             <label
                               htmlFor={`parameters[${index}].icon`}
                               className="font-poppins font-semibold text-primary pt-2"
@@ -337,7 +351,7 @@ const Navbar = () => {
                               </option>
                             </Field>
                           </div>
-                          <div className="col-span-1 flex items-center gap-5">
+                          <div className="col-span-1 flex items-center justify-between">
                             <label
                               htmlFor={`parameters[${index}].label`}
                               className="font-poppins font-semibold text-primary pt-2"
@@ -351,7 +365,7 @@ const Navbar = () => {
                               className="border-solid border-2 border-gray rounded-md p-2 mt-1"
                             />
                           </div>
-                          <div className="col-span-1 flex items-center gap-5">
+                          <div className="col-span-1 flex items-center justify-between">
                             <label
                               htmlFor={`parameters[${index}].type`}
                               className="font-poppins font-semibold text-primary pt-2"
@@ -359,13 +373,48 @@ const Navbar = () => {
                               Tür
                             </label>
                             <Field
-                              type="text"
+                              as="select"
                               name={`parameters[${index}].type`}
                               id={`parameters[${index}].type`}
-                              className="border-solid border-2 border-gray rounded-md p-2 mt-1"
+                              className=" border-solid border-2 border-gray rounded-md p-2 mt-1 bg-white cursor-pointer"
+                            >
+                              <option value="float">Float</option>
+                              <option value="string">String</option>
+                              <option value="boolean">Boolean</option>
+                              <option value="decimal">Decimal</option>
+                              <option value="time">Time</option>
+                            </Field>
+                          </div>
+                          
+                          <div className="col-span-1 flex items-center justify-between">
+                            <label
+                              htmlFor={`parameters[${index}].thresholds.warning`}
+                              className="font-poppins font-semibold text-primary pt-2"
+                            >
+                              Uyarı Seviyesi
+                            </label>
+                            <Field
+                              type="number"
+                              name={`parameters[${index}].thresholds.warning`}
+                              id={`parameters[${index}].thresholds.warning`}
+                              className="border-solid border-2 border-gray rounded-md p-2 mt-1 w-[30%]"
                             />
                           </div>
-                          <div className="col-span-1 flex items-center gap-5">
+                          <div className="col-span-1 flex items-center justify-between">
+                            <label
+                              htmlFor={`parameters[${index}].thresholds.critical`}
+                              className="font-poppins font-semibold text-primary pt-2"
+                            >
+                              Kritik Seviye
+                            </label>
+                            <Field
+                              type="number"
+                              name={`parameters[${index}].thresholds.critical`}
+                              id={`parameters[${index}].thresholds.critical`}
+                              className="border-solid border-2 border-gray rounded-md p-2 mt-1 w-[30%]"
+                            />
+                          </div>
+                          <div className="col-span-1 flex items-center justify-between">
                             <label 
                               htmlFor={`parameters[${index}].isIncludePercantage`}
                               className=" font-poppins font-semibold text-primary pt-2"
@@ -382,7 +431,7 @@ const Navbar = () => {
                                 <option value={false}>Hayır</option>
                             </Field>
                           </div>
-                          <div className="col-span-1 flex items-center gap-5">
+                          <div className="col-span-1 flex items-center justify-between">
                             <label
                               htmlFor={`parameters[${index}].color`}
                               className="font-poppins font-semibold text-primary pt-2"
@@ -390,13 +439,13 @@ const Navbar = () => {
                               Renk
                             </label>
                             <Field
-                              type="text"
+                              type="color"
                               name={`parameters[${index}].color`}
                               id={`parameters[${index}].color`}
                               className="border-solid border-2 border-gray rounded-md p-2 mt-1"
                             />
                           </div>
-                          <div className="col-span-1 flex items-center gap-5">
+                          <div className="col-span-1 flex items-center justify-between">
                             <label
                               htmlFor={`parameters[${index}].rowSpan`}
                               className="font-poppins font-semibold text-primary pt-2"
@@ -410,10 +459,13 @@ const Navbar = () => {
                               className=" border-solid border-2 border-gray rounded-md p-2 mt-1 bg-white cursor-pointer"
                             >
                               <option value="row-span-2">2</option>
-                              <option value="row-span-1">1</option>
+                              <option value="row-span-3">3</option>
+                              <option value="row-span-4">4</option>
+                              <option value="row-span-5">5</option>
+                              <option value="row-span-6">6</option>
                             </Field>
                           </div>
-                          <div className="col-span-1 flex items-center gap-5">
+                          <div className="col-span-1 flex items-center justify-between">
                             <label
                               htmlFor={`parameters[${index}].colSpan`}
                               className="font-poppins font-semibold text-primary pt-2"
@@ -427,8 +479,44 @@ const Navbar = () => {
                               className=" border-solid border-2 border-gray rounded-md p-2 mt-1 bg-white cursor-pointer"
                             >
                               <option value="col-span-2">2</option>
-                              <option value="col-span-1">1</option>
                             </Field>
+                          </div>
+                          <div className="col-span-1 flex items-center justify-between">
+                            <label
+                              htmlFor={`parameters[${index}].visualization`}
+                              className="font-poppins font-semibold text-primary pt-2"
+                            >
+                              İkon
+                            </label>
+                            <Field
+                                as="select"
+                                name={`parameters[${index}].visualization`}
+                                id={`parameters[${index}].visualization`}
+                                className="border-solid border-2 border-gray rounded-md p-2 mt-1 bg-white cursor-pointer"
+                              >
+                              <option value="line_chart">
+                                Line Chart
+                              </option>
+                              <option value="bar_chart">
+                                Bar Chart
+                              </option>
+                              <option value="pie_chart">
+                                Pie Chart
+                              </option>
+                            </Field>
+                          </div>
+                          <div className="col-span-1 flex items-center w-full justify-end">
+                            <button
+                              type="button"
+                              className="bg-red-600 text-white px-3 py-1 rounded"
+                              onClick={() => {
+                                const updatedParameters = [...values.parameters];
+                                updatedParameters.splice(index, 1);
+                                setFieldValue("parameters", updatedParameters);
+                              }}
+                            >
+                              Sil
+                            </button>
                           </div>
                           
                           
@@ -444,14 +532,19 @@ const Navbar = () => {
                             ...values.parameters,
                             {
                               key: "",
-                              icon: "",
+                              icon: "fa-solid fa-faucet",
                               label: "",
-                              type: "",
+                              type: "float",
                               isIncludePercantage: false,
                               rowSpan: "row-span-2",
                               colSpan: "col-span-2",
                               color: "bg-yellow-600",
                               status: "0",
+                              visualization:"",
+                              thresholds: {
+                                warning: "",
+                                critical: "",
+                              },
                             },
                           ]);
                         }}

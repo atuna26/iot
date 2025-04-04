@@ -4,7 +4,14 @@ export const navLinks = [
         title: 'Ana sayfa'
     },
     {
-        id: "contact",
-        title: 'İletişim'
+        id: "",
+        title: 'Senaryolar'
+    },
+]
+
+export const dropDownIcon = [
+    {
+        value:"fa-solid fa-faucet",
+        text:"Musluk"
     },
 ]

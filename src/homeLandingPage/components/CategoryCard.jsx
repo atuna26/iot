@@ -15,7 +15,7 @@ const CategoryCard = (props) => {
             <i className="fa-solid fa-temperature-high text-red-800 font-light"></i>
         </p>
       </div>
-      <div className={`w-full grid ${props.width} grid-rows-8 gap-2`}>
+      <div className={`w-full grid ${props.width} gap-2`}>
 
         {props.parameters.map((parameter) => (
           <ProductCard key={parameter.name} icon={parameter.icon} name={parameter.label} status={parameter.status} isIncludePercantage={parameter.isIncludePercantage} rowSpan={parameter.rowSpan} colSpan={parameter.colSpan} color={parameter.color}/>

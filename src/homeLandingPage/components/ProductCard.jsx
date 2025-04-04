@@ -18,8 +18,9 @@ const ProductCard = (props) => {
     };
 
     return (
-        <div className={`${props.colSpan} ${props.rowSpan} row-span-2 flex flex-row items-center rounded-xl bg-white shadow-lg py-2 px-4 border border-[#e0e0e0]`}>
-            <div className={` ${status !== "Kapalı" ? props.color : "bg-gray"} w-[50px] h-[50px] rounded-full flex items-center justify-center`}>
+        <div className={`${props.colSpan} ${props.rowSpan} row-span-2 flex flex-row  items-center  bg- rounded-xl bg-white shadow-lg py-2 px-4 border border-[#e0e0e0]`}>
+            <div   style={{ backgroundColor: status !== "Kapalı" ? props.color : "#ccc" }}
+             className={`w-[50px] h-[50px] rounded-full flex items-center justify-center`}>
                 <i className={`${props.icon} fs-4 text-[25px] cursor-pointer`} onClick={toggleStatus}></i>
             </div>
             <div className="ml-2 flex flex-col items-start justify-center">
