@@ -7,6 +7,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { color } from "three/tsl";
 import { useSelector } from "react-redux";
+import IconSelection from "./IconSelection";
+import ChartSelection from "./ChartSelection";
 
 const Navbar = () => {
   const location = useLocation();
@@ -288,7 +290,7 @@ const Navbar = () => {
                       {values.parameters.map((parameter, index) => (
                         <div
                           key={index}
-                          className="grid grid-cols-2 border-solid border-2 border-gray rounded-md p-2 mt-1 gap-x-2"
+                          className="grid grid-cols-2 border-solid border-2 border-gray rounded-md p-2 mt-1 gap-x-2 gap-y-4"
                         >
                           <div className="col-span-1 flex items-center justify-between">
                             <label 
@@ -319,37 +321,8 @@ const Navbar = () => {
                             >
                               İkon
                             </label>
-                            <Field
-                                as="select"
-                                name={`parameters[${index}].icon`}
-                                id={`parameters[${index}].icon`}
-                                className="border-solid border-2 border-gray rounded-md p-2 mt-1 bg-white cursor-pointer"
-                              >
-                              <option value="fa-solid fa-faucet">
-                                Musluk
-                              </option>
-                              <option value="fa-solid fa-droplet">
-                                Nem
-                              </option>
-                              <option value="fa-solid fa-plug">
-                                Güç
-                              </option>
-                              <option value="fa-solid fa-lightbulb">
-                                Aydınlatma
-                              </option>
-                              <option value="fa-solid fa-wind">
-                                Hava Akışı
-                              </option>
-                              <option value="fa-solid fa-gauge">
-                                Basınç
-                              </option>
-                              <option value="fa-solid fa-signal">
-                                Sinyal
-                              </option>
-                              <option value="fa-solid fa-bolt">
-                                Voltaj
-                              </option>
-                            </Field>
+                            <Field name={`parameters[${index}].icon`} className="border-solid border-2 border-gray rounded-md p-2 mt-1 bg-white cursor-pointer"
+                            component={IconSelection} />
                           </div>
                           <div className="col-span-1 flex items-center justify-between">
                             <label
@@ -481,31 +454,21 @@ const Navbar = () => {
                               <option value="col-span-2">2</option>
                             </Field>
                           </div>
-                          <div className="col-span-1 flex items-center justify-between">
+                          <div className="col-span-2 flex items-center justify-between">
                             <label
                               htmlFor={`parameters[${index}].visualization`}
                               className="font-poppins font-semibold text-primary pt-2"
                             >
-                              İkon
+                              Grafik
                             </label>
                             <Field
-                                as="select"
                                 name={`parameters[${index}].visualization`}
                                 id={`parameters[${index}].visualization`}
                                 className="border-solid border-2 border-gray rounded-md p-2 mt-1 bg-white cursor-pointer"
-                              >
-                              <option value="line_chart">
-                                Line Chart
-                              </option>
-                              <option value="bar_chart">
-                                Bar Chart
-                              </option>
-                              <option value="pie_chart">
-                                Pie Chart
-                              </option>
-                            </Field>
+                                component={ChartSelection} 
+                              />
                           </div>
-                          <div className="col-span-1 flex items-center w-full justify-end">
+                          <div className="col-span-2 flex items-center w-full justify-end">
                             <button
                               type="button"
                               className="bg-red-600 text-white px-3 py-1 rounded"

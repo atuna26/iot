@@ -16,10 +16,6 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import styles from "../../style";
 import EditableProductCard from './EditableProductCard';
-import NewProductCard from './NewProductCard';
-import LineChartCard from './LineChartCard';
-import AreaChartCard from './AreaChartCard';
-import BarChartCard from './BarChartCard';
 import EditableLineChartCard from './EditableLineChartCard';
 import EditableAreaChartCard from './EditableAreaChartCard';
 import EditableBarChartCard from './EditableBarChartCard';

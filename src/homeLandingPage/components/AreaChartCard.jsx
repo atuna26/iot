@@ -5,7 +5,7 @@ const AreaChartCard = (props) => {
     
 
     return (
-        <div className={`${props.colSpan} ${props.rowSpan}  flex flex-row items-center rounded-xl bg-white shadow-lg py-2 px-4 border border-[#e0e0e0]`}>
+        <div className={`flex flex-row items-center rounded-xl bg-whitepy-2 px-4 w-[400px]`}>
             <ResponsiveContainer aspect={2.0/1.0}>
                 <AreaChart width={730} height={250} data={[{
                     "name": "Güç A",
