@@ -34,7 +34,7 @@ const Main = () => {
     <section className={`flex sm:flex-row flex-col  w-full justify-end items-center ${styles.paddingY}`}>
     <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
         {devices.map((device) => (
-          <CategoryCard key={JSON.stringify(device)} name={device.deviceName} width={device.width} parameters={device.parameters} all={device} />
+          <CategoryCard key={JSON.stringify(device)} name={device.deviceName} width={device.width} parameters={device.parameters} all={device} getDevicesList={getDevicesList} />
         ))}
     </div>
   </section>

@@ -19,6 +19,7 @@ import EditableProductCard from './EditableProductCard';
 import EditableLineChartCard from './EditableLineChartCard';
 import EditableAreaChartCard from './EditableAreaChartCard';
 import EditableBarChartCard from './EditableBarChartCard';
+import NewProductCard from './NewProductCard';
 
 const SortableProductCard = ({ id, ...props }) => {
   const {

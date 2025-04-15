@@ -11,6 +11,8 @@ export default {
         background: "#F3F4F6", // Light Gray (almost white)
         gray: "#D1D5DB", // Gray
         white: "#f9fafb", // Pure White
+        danger: "#EF4444", // Red
+        success: "#22C55E", // Green
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
