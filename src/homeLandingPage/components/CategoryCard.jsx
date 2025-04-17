@@ -144,10 +144,10 @@ const CategoryCard = (props) => {
         <p
           className={`${styles.paragraph} text-primary max-w-[400px] mt-5 text-center md:text-start`}
         >
-          <i
+          {/* <i
             className="fa-solid fa-house-signal text-primary font-light text-lg cursor-pointer"
             onClick={() => setIsModalOpen(true)}
-          ></i>
+          ></i> */}
         </p>
       </div>
       <div className={`w-full grid ${props.width} gap-2`}>
@@ -156,6 +156,7 @@ const CategoryCard = (props) => {
             key={parameter.key}
             deviceKey={parameter.key}
             serialNumber={props.all.serialNumber}
+            isItRelay={parameter.isItRelay}
             icon={parameter.icon}
             name={parameter.label}
             status={parameter.status}
@@ -164,6 +165,7 @@ const CategoryCard = (props) => {
             colSpan={parameter.colSpan}
             color={parameter.color}
             visualization={parameter.visualization}
+            openSureModalForRelay={openSureModalForRelay}
           />
         ))}
 

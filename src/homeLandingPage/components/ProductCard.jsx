@@ -54,10 +54,10 @@ const ProductCard = (props) => {
     return (
         <>
             {/* Card */}
-            <div onClick={handleCardClick} className={`${props.colSpan} ${props.rowSpan} row-span-2 flex flex-row items-center bg-white rounded-xl shadow-lg py-2 px-4 border border-[#e0e0e0] cursor-pointer`}>
-                <div style={{ backgroundColor: status !== "Kapalı" ? props.color : "#ccc" }}
+            <div  onClick={props.isItRelay ? undefined  : handleCardClick} className={`${props.colSpan} ${props.rowSpan} row-span-2 flex flex-row items-center bg-white rounded-xl shadow-lg py-2 px-4 border border-[#e0e0e0] cursor-pointer`}>
+                <div style={{ backgroundColor: status != 0 ? props.color : "#ccc" }}
                     className="w-[50px] h-[50px] rounded-full flex items-center justify-center">
-                    <i className={`${props.icon} fs-4 text-[25px]`}></i>
+                    <i  onClick={props.isItRelay ? ()=> props.openSureModalForRelay(props.deviceKey, status, props.name) : undefined } className={`${props.icon} fs-4 text-[25px]`}></i>
                 </div>
                 <div className="ml-2 flex flex-col items-start justify-center">
                     <p className="font-poppins font-semibold text-[15px] text-primary max-w-[100px] truncate">
@@ -120,12 +120,14 @@ const ProductCard = (props) => {
 
 ProductCard.propTypes = {
     serialNumber: PropTypes.string.isRequired,
+    deviceKey: PropTypes.string.isRequired,
     icon: PropTypes.string.isRequired,
     color: PropTypes.string,
     name: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
     isIncludePercantage: PropTypes.bool.isRequired,
     visualization: PropTypes.string,
+    isItRelay: PropTypes.bool.isRequired,
     colSpan: PropTypes.string.isRequired,
     rowSpan: PropTypes.string.isRequired,
 };

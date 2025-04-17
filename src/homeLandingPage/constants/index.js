@@ -4,7 +4,7 @@ export const navLinks = [
         title: 'Ana sayfa'
     },
     {
-        id: "",
+        id: "scenarios",
         title: 'Senaryolar'
     },
 ]

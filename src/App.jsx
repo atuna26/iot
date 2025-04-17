@@ -7,6 +7,7 @@ import { Navbar } from "./homeLandingPage/components";
 import EditableMain from "./homeLandingPage/components/EditableMain";
 import RegisterPage from "./RegisterPage";
 import { useSelector } from "react-redux";
+import Scenario from "./homeLandingPage/components/Scenario";
 
 function App() {
   const isAuth = Boolean(useSelector((state) => state.token)); 
@@ -25,6 +26,7 @@ function App() {
             <div className={`${styles.boxWidth}`}>
               <Routes>
                 <Route path="/" element={<Main />} />
+                <Route path="/scenarios" element={<Scenario />} />
                 <Route path="/login" element={<Navigate to="/" replace/>} />
                 <Route path="/register" element={<Navigate to="/" replace/>} />
                 <Route path="/editLayout" element={<EditableMain />} />
