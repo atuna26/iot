@@ -3,7 +3,7 @@ import loginBanner from "../assets/loginbanner.jpg"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
 import { useNavigate } from "react-router-dom"
-import logoWhite from "../assets/logoWhite.png"
+import logoCanel from "../assets/logoCanel.png"
 
 const RegisterPage = () => {
     const navigate = useNavigate()
@@ -32,7 +32,7 @@ const RegisterPage = () => {
         <div className={`${styles.paddingX} ${styles.flexCenter}`}>
             <div className={`${styles.boxWidth} ${styles.flexCenter} h-screen`}>
                 <div style={{background: "rgba(255, 255, 255, 0.1)"}} className={`${styles.flexCenter} bg-white backdrop-blur-lg   flex-col border-solid border-2 border-primary rounded-lg p-5 w-[400px] animate-glow-soft shadow-glow-soft`}>	
-                <img src={logoWhite} className='h-[80px] mt-2'/>
+                <img src={logoCanel} className='h-[80px] mt-2'/>
                 <h1 className="flex-1 font-poppins font-semibold ss:text-[34px] text-[24px] text-white text-center
                     leading-[40px]">Hoş Geldiniz
                 </h1>

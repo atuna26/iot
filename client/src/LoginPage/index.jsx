@@ -5,7 +5,7 @@ import * as Yup from "yup"
 import { useNavigate } from "react-router-dom"
 import { useDispatch} from "react-redux"
 import { setLogin } from "../state"
-import logoWhite from "../assets/logoWhite.png"
+import logoCanel from "../assets/logoCanel.png"
 
 
 const LoginPage = () => {
@@ -18,7 +18,7 @@ const LoginPage = () => {
 
     const handleSubmit = async(values) => {
         console.log("submitted")
-        const loginResponse = await fetch("http://85.95.244.99:8999/api/v1/auth/login", {
+        const loginResponse = await fetch("http://localhost:3003/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -31,7 +31,7 @@ const LoginPage = () => {
                 token: loggedIn.token
             }))
         }
-        navigate("/")
+        navigate("/admin-panel")
     }
 
   return (
@@ -39,7 +39,7 @@ const LoginPage = () => {
         <div className={`${styles.paddingX} ${styles.flexCenter}`}>
             <div className={`${styles.boxWidth} ${styles.flexCenter} h-screen`}>
                 <div style={{background: "rgba(255, 255, 255, 0.1)"}} className={`${styles.flexCenter} bg-white backdrop-blur-lg   flex-col border-solid border-2 border-primary rounded-lg p-5 w-[400px] animate-glow-soft shadow-glow-soft`}>	
-                <img src={logoWhite} className='h-[80px] mt-2'/>
+                <img src={logoCanel} className='h-[80px] mt-2'/>
                 <h1 className="flex-1 font-poppins font-semibold ss:text-[34px] text-[24px] text-white text-center
                     leading-[40px]">Tekrar,<br className="block"/>Hoş Geldin
                     
@@ -52,11 +52,6 @@ const LoginPage = () => {
                             <Field type="email" name="email" id="email" className="border-solid border-2 border-white rounded-md p-2 mt-1" />
                             <label htmlFor="password" className={`${styles.paragraph} text-white pt-2`}>Password</label>
                             <Field type="password" name="password" id="password" className="border-solid border-2 border-white rounded-md p-2 mt-1" />
-                            <div className="flex flex-row gap-1 justify-center pt-2">
-                                <p className={`font-poppins font-normal text-white opacity-50 text-[15px] self-center`}>Hesabınız yok mu? </p>
-                                <p className="font-poppins opacity-100 text-[15px] self-centeropacity-100 text-white font-medium cursor-pointer" onClick={() => navigate("/register")}>Kayıt olmak için tıklayın</p> 
-                            </div>
-                          
                             <button className="py-[6px] mt-5 px-4 bg-primary rounded-[10px] mb-2 text-white text-center w-[150px] self-center" type="submit" disabled={isSubmitting}>
                                 Giriş yap
                             </button>

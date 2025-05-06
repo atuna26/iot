@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+
 
 @tailwind base;
 @tailwind components;
@@ -12,6 +15,11 @@
     #11101d 91.61%
   );
   --card-shadow: 0px 20px 100px -10px rgba(66, 71, 91, 0.1);
+}
+
+body {
+  background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+  
 }
 
 * {
@@ -247,4 +255,26 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-fill-color: transparent;
+}
+
+.glassDiv {
+  background: rgba( 255, 255, 255, 0.05 );
+  backdrop-filter: blur( 20px );
+  -webkit-backdrop-filter: blur( 20px );
+  border-radius: 3px;
+  border: 0.1px solid rgba( 255, 255, 255, 0.18 );
+ 
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 20s linear infinite;
 }
